@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.iu.base.board.notice.NoticeDAO">
+
+	<insert id="setInsert" parameterType="com.iu.base.board.BoardVO">
+	
+	INSERT INTO NOTICE (TITLE, WRITER, CONTENTS,REGDATE,HIT)
+	VALUES(#{title},#{writer},#{contents},now(),0)
+	
+	</insert>
+
+
+
+
+
+
+</mapper>
