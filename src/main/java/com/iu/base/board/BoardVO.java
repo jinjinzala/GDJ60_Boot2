@@ -13,7 +13,7 @@ public class BoardVO {
 	private Long num;
 	private String title;
 	private String contents;
-	private  String Writer;
+	private  String writer;
 	private  Date regDate;
 	private  Long hit;
 	
