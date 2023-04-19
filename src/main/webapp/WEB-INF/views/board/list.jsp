@@ -50,7 +50,7 @@
 								<tr>
 
 									<td>${boardVo.num}</td>
-									<td>${boardVo.title}</td>
+									<td><a href="./detail?num=${boardVo.num}">${boardVo.title}</a></td>
 									<td>${boardVo.writer}</td>
 									<td>${boardVo.regDate}</td>
 									<td>${boardVo.hit}</td>
@@ -60,7 +60,7 @@
 						</tbody>
 					</table>
 				</div>
-
+<a href="./add">add</a>
 				<!-- <nav aria-label="Page navigation example">
 					<ul class="pagination">
 						<li class="page-item"><a class="page-link" href="#">맨앞으로</a></li>
@@ -70,8 +70,7 @@
 						<li class="page-item"><a class="page-link" href="#">맨끝으로</a></li>
 					</ul>
 				</nav> -->
-
-		<div class="row">
+					<div class="row">
 			<nav aria-label="Page navigation example">
 			  <ul class="pagination">
 			  	<li class="page-item">
@@ -111,7 +110,7 @@
 		</div>
 		<div class="row">
 	<div class="col-auto">
-	  <form class="row g-3" action="./list" method="get" id="searchForm">
+	  <form class="row g-3" action="./list"  id="searchForm">
 		<input type="hidden" name="page" value="1" id="page">
 		<div class="col-auto">
 		  <label for="kind" class="visually-hidden">Kind</label>
@@ -131,10 +130,10 @@
 	  </form>
 	</div>
   </div>
-  
-			</div>
+</div>
 		</section>
 	</main>
+	
 	<!-- Footer 적용 -->
 	<c:import url="../temp/footer.jsp"></c:import>
 	<script src="/js/pageing.js"></script>

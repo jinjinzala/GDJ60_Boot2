@@ -8,21 +8,21 @@
 	<where>
 		<if test="kind == 'title'">
 		TITLE LIKE CONCAT('%',#{search},'%')</if>
-		<if test="kind == 'contents' ">CONTENTS LIKE CONCAT('%',#{contents},'%')</if>
+		<if test="kind == 'contents'">CONTENTS LIKE CONCAT('%',#{contents},'%')</if>
 		<if test="kind == 'writer'">WRITER LIKE CONCAT('%',#{writer},'%')</if>
 		
 	</where>
 	</sql>
 
-<select id="getTotalCount" parameterType="Pager" resultType="Long">
-SELECT COUNT(NUM) FROM NOTICE
-<include refid="search"></include>
+	<select id="getTotalCount" parameterType="Pager" resultType="Long">
+	SELECT COUNT(NUM) FROM NOTICE
+	<include refid="search"></include>
 
 </select>
-	<insert id="setInsert" parameterType="com.iu.base.board.BoardVO">
+	<insert id="setInsert" parameterType="com.iu.base.board.BoardVO" useGeneratedKeys="true" keyProperty="num">
 	
-	INSERT INTO NOTICE (TITLE, WRITER, CONTENTS,REGDATE,HIT)
-	VALUES(#{title},#{writer},#{contents},now(),0)
+	INSERT INTO NOTICE (NUM, TITLE, WRITER, CONTENTS,REGDATE,HIT)
+	VALUES(#{num},#{title},#{writer},#{contents},now(),0)
 	
 	</insert>
 
@@ -30,17 +30,53 @@ SELECT COUNT(NUM) FROM NOTICE
     DELETE FROM NOTICE WHERE NUM = #{num}
     </delete>
 		
-	<update id="setUpdate" parameterType="com.iu.base.board.BoardVO" >
+	<update id="setUpdate" parameterType="BoardVO" >
 	UPDATE NOTICE SET TITLE = #{title},WRITER = #{writer},CONTENTS = #{contents}
 	WHERE NUM = #{num}
 	</update>
 
-	<select id="getList" parameterType="Pager"  resultType="NoticeVO" >
+	 <select id="getDetail" parameterType="BoardVO" resultMap="getDetailResult">
+		SELECT *
+		FROM NOTICE N
+		LEFT JOIN
+		NOTICEFILES NF
+		ON (N.NUM = NF.NUM)
+		WHERE N.NUM = #{num}
+	</select>
 	
+	<resultMap type="NoticeVO" id="getDetailResult">
+   	<!--select된 것들중에 pk를 id에다가 써줘  -->
+        <id column="num" property="num"/>
+  		<result column="contents" property="contents"/>
+  		<result column="writer" property="writer"/>
+  		<result column="regDate" property="regDate"/>
+  		<result column="title" property="title"/>
+  		<result column="hit" property="hit"/>
+  		
+	<!--type에 멤버메서드중에서 속성을 넣어주기  -->
+	<!--of type은 제네릭 타입을 쓰라는 뜻입니다 column은 대소문자구문 하지 않습니다-->
+	<collection property="boardFileVOs" javaType="List" ofType="BoardFileVO">
+		<id column="fileNum" property="fileNum" />
+		<result column="fileName"  property="fileName"/>
+		<result column="oriName" property="oriName" />
+	</collection>
+	</resultMap>
+	
+	<select id="getList" parameterType="Pager"  resultType="NoticeVO" >
 	SELECT * FROM NOTICE 
 	<include refid="search"></include>
 	ORDER BY NUM DESC
 	LIMIT #{startRow},#{perPage}
 	</select>
+	
+	
+	<select id="getFileDetail" parameterType="BoardFileVO" resultType="NoticeVO">
+	SELECT * FROM NOTICEFILES
+	</select>
+	
+	<insert id="setFileInsert" parameterType="BoardFileVO" >
+	INSERT INTO NOTICEFILES (NUM , FILENUM , FILENAME, ORINAME)
+	VALUES(#{num},#{fileNum},#{fileName},#{oriName})
+	</insert>
 
 </mapper>

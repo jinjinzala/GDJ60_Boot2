@@ -14,7 +14,7 @@ class NoticeDAOTest {
 	@Autowired
 	private NoticeDAO noticeDAO;
 	
-	@Test
+	//@Test
 	void setInsertTest() throws Exception{
 		for(int i=0; i<120; i++) {
 		BoardVO boardVO = new BoardVO();

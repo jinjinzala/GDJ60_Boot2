@@ -11,7 +11,7 @@
         <meta name="author" content="" />
         <title>Modern Business - Start Bootstrap Template</title>
         <!-- Favicon-->
-          <c:import url="./tmp/style.jsp"></c:import>
+          <c:import url="./temp/style.jsp"></c:import>
         <!-- Favicon-->
         <!-- Bootstrap icons-->
         <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" />
@@ -20,7 +20,7 @@
     </head>
     <body class="d-flex flex-column h-100">
         <main class="flex-shrink-0">
-      <c:import url="./tmp/header.jsp"></c:import>
+      <c:import url="./temp/header.jsp"></c:import>
             <!-- Header-->
             <header class="bg-dark py-5">
                 <div class="container px-5">

@@ -17,21 +17,23 @@ public class Pager {
 
 	//시작 index 번호
 	private Long startRow;
-
 	private String kind;
 	private String contents;
 	private String writer;
 	private String search;
 	private Long totalPage;
 	//한블럭당 출력할 번호의 갯수
-	private Long perBlock;
+	private Long perBlock = 10L;
 	//table에서 조회할 끝번호 
 	private Long lastRow;
 	private Long startNum;
 	private Long lastNum;
-	private boolean after;
+	//다음 블럭 유무
+	private boolean after; 
+	//이전 블럭 유무
 	private boolean before;
-   
+	
+	
    //시작 index 번호를 계산하는 메서드
    public void makeStartRow() {
       //page = 1, startRow = 0

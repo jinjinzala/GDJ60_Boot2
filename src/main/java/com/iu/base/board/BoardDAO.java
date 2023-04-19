@@ -8,10 +8,10 @@ public interface BoardDAO {
 	
 //		//글개수
 		public Long getTotalCount(Pager pager) throws Exception;
-//		
+	
 //글리스트
 		public  List<BoardVO> getList(Pager pager) throws Exception;
-//	
+	
 //		//글하나 
 		public BoardVO getDetail (BoardVO boardVO) throws Exception;
 	
@@ -24,7 +24,12 @@ public interface BoardDAO {
 		//글작성
 		public int setInsert(BoardVO boardVO) throws Exception;
 		
-//		//글삭제
+		//글삭제
 		public int setDelete(BoardVO boardVO) throws Exception;
+		
+		public BoardFileVO getFileDetail (BoardFileVO boarFileVO) throws Exception;
+		
+		public int setFileInsert(BoardFileVO boardFileVO) throws Exception;
+		
 		
 }
