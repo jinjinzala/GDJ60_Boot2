@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.iu.base.member.MemberDAO">
+
+	<!-- <insert id="setInsert" parameterType="com.iu.base.board.BoardVO" useGeneratedKeys="true" keyProperty="num">
+	INSERT INTO MEMBER (NUM, TITLE, WRITER, CONTENTS,REGDATE,HIT)
+	VALUES(#{num},#{title},#{writer},#{contents},now(),0)
+	</insert> -->
+
+
+
+
+<select id="getLogin" parameterType="MemberVO" resultMap="GetLoglnResult" >
+ SELECT M.userName, M.email, R.num , R.ROLENAME
+ FROM MEMBER M 
+ 	INNER JOIN 
+ 	MEMBERROLE MR
+ 	ON M.USERNAME = MR.USERNAME
+ 	INNER JOIN
+ 	ROLE R
+ 	ON MR.NUM = R.NUM
+ 	WHERE M.USERNAME = #{userName} AND M.PASSWORD = #{password}
+
+</select>
+
+<resultMap type="MemberVO" id="GetLoglnResult">
+<id property="userName" column="userName"/>
+<result property="email" column="email"/>
+	<collection property="roleVOs" javaType="List" ofType="MemberRoleVO">
+		<id column="num" property="num" />
+		<result column="RoleName"  property="RoleName"/>
+	</collection>
+
+</resultMap>
+
+</mapper>

@@ -1,4 +1,4 @@
-package com.iu.base.board.notice;
+package com.iu.base.board.qna;
 
 import java.util.List;
 import java.util.Random;
@@ -20,12 +20,13 @@ import lombok.extern.slf4j.Slf4j;
 @Service
 @Slf4j
 @Transactional(rollbackFor = Exception.class)
-public class NoticeService implements BoardService{
-
-	@Autowired
-	private NoticeDAO noticeDAO;
+public class QnaService implements BoardService{
 	
-	@Value("${app.upload.notice}")
+	
+	@Autowired
+	private QnaDAO qnaDAO;
+	
+	@Value("${app.upload.qna}")
 	private String path;
 	
 	@Autowired
@@ -37,18 +38,11 @@ public class NoticeService implements BoardService{
 		return 0;
 	}
 
-	@Override
-	public int setInsert(BoardVO boardVO ,MultipartFile[] multipartFiles) throws Exception {
+	public int setInsert(QnaVO qnaVO ,MultipartFile[] multipartFiles) throws Exception {
 		// TODO Auto-generated method stub
 		
-		int result = noticeDAO.setInsert(boardVO);
-		log.error("num========================>" , boardVO.getNum());
-		Random random = new Random();
-		int num = random.nextInt(1);
-		if(num == 0) {
-			throw new Exception();
-		}
-		
+		int result = qnaDAO.setInsert(qnaVO);
+        result = qnaDAO.setInsertUp(qnaVO);
 		if(multipartFiles != null) {
 			for(MultipartFile multipartFile : multipartFiles) {
 				//비어있다면 
@@ -58,10 +52,10 @@ public class NoticeService implements BoardService{
 					BoardFileVO boardFileVO = new BoardFileVO();
 					boardFileVO.setFileName(fileName);
 					boardFileVO.setOriName(multipartFile.getOriginalFilename());
-					boardFileVO.setNum(boardVO.getNum());
+					boardFileVO.setNum(qnaVO.getNum());
 					log.error("fileName : {}",fileName);
 					
-					result = noticeDAO.setFileInsert(boardFileVO);
+					result = qnaDAO.setFileInsert(boardFileVO);
 					
 				}
 			}
@@ -75,19 +69,20 @@ public class NoticeService implements BoardService{
 		// TODO Auto-generated method stub
 		return 0;
 	}
+	
 
-	@Override
+	
 	public List<BoardVO> getList(Pager pager) throws Exception {
 		// TODO Auto-generated method stub
 		pager.makeStartRow();
-		pager.makeNum(noticeDAO.getTotalCount(pager));
-		return noticeDAO.getList(pager);
+		pager.makeNum(qnaDAO.getTotalCount(pager));
+		return qnaDAO.getList(pager);
 	}
 
-	@Override
-	public BoardVO getDetail(BoardVO boardVO) throws Exception {
+	
+	public BoardVO getDetail(QnaVO qnaVO) throws Exception {
 		// TODO Auto-generated method stub
-		return noticeDAO.getDetail(boardVO);
+		return qnaDAO.getDetail(qnaVO);
 	}
 
 	@Override
@@ -99,9 +94,20 @@ public class NoticeService implements BoardService{
 	@Override
 	public BoardFileVO getFileDetail(BoardFileVO boardFileVO) throws Exception {
 		// TODO Auto-generated method stub
-		return noticeDAO.getFileDetail(boardFileVO);
+		return qnaDAO.getFileDetail(boardFileVO);
 	}
 
+	@Override
+	public int setInsert(BoardVO boardVO, MultipartFile[] multipartFiles) throws Exception {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public BoardVO getDetail(BoardVO boardVO) throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
 
 

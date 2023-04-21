@@ -43,6 +43,11 @@
 								<th>작성자</th>
 								<th>작성날짜</th>
 								<th>조회수</th>
+								<c:if test="${board eq 'qna'}">
+								<!-- <th>ref</th> -->
+								<th>step</th>
+								<th>depth</th>
+								</c:if>	
 							</tr>
 						</thead>
 						<tbody>

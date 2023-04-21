@@ -18,6 +18,7 @@ public class BoardVO {
 	private  Date regDate;
 	private  Long hit;
 	
+	
 	private List<BoardFileVO> boardFileVOs;
 	
 }

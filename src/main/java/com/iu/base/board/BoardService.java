@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.iu.base.board.qna.QnaVO;
 import com.iu.base.util.Pager;
 
 @Service
@@ -29,7 +30,9 @@ public interface BoardService {
 	
 	public BoardFileVO getFileDetail (BoardFileVO boardFileVO) throws Exception;
 	
-	BoardFileVO getFileDown(BoardFileVO boardFileVO) throws Exception;
+
+	
+	
 	
 	
 	

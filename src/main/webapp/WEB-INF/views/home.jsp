@@ -185,6 +185,7 @@
                     </aside>
                 </div>
             </section>
+           
         </main>
         <!-- Footer 적용해야합니다 -->
           <c:import url="./temp/footer.jsp"></c:import>
