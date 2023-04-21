@@ -3,10 +3,10 @@
 
 <mapper namespace="com.iu.base.member.MemberDAO">
 
-	<!-- <insert id="setInsert" parameterType="com.iu.base.board.BoardVO" useGeneratedKeys="true" keyProperty="num">
-	INSERT INTO MEMBER (NUM, TITLE, WRITER, CONTENTS,REGDATE,HIT)
-	VALUES(#{num},#{title},#{writer},#{contents},now(),0)
-	</insert> -->
+	<insert id="setInsert" parameterType="memberVO" >
+	INSERT INTO MEMBER (USERNAME, PASSWORD, EMAIL,BIRTH,ENABLED)
+	VALUES(#{userName},#{password},#{email},#{birth},1)
+	</insert> 
 
 
 
