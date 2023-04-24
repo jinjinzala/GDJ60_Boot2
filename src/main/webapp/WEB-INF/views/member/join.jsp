@@ -8,6 +8,7 @@
 	content="width=device-width, initial-scale=1, shrink-to-fit=no" />
 <meta name="description" content="" />
 <meta name="author" content="" />
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <title>Modern Business - Start Bootstrap Template</title>
 <!-- css favicon -->
 <c:import url="../temp/style.jsp"></c:import>
@@ -73,7 +74,8 @@
       </div>
     </div>
   </div>
+  <c:import url="../temp/footer.jsp"></c:import>
+	<script type="text/javascript" src="../js/joinFormCheck.js"></script>
 </body>
-	<c:import url="../temp/style.jsp"></c:import>
-	<script src="/js/joinFormCheck.js"></script>
+	
 </html>
