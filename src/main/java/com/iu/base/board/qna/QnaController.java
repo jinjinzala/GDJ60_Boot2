@@ -44,9 +44,9 @@ public class QnaController {
 	}
 	
 	@GetMapping("detail")
-	public ModelAndView getDetail(QnaVO qnaVO) throws Exception {
+	public ModelAndView getDetail(BoardVO boardVO) throws Exception {
 		ModelAndView mv = new ModelAndView();
-		BoardVO boardVO = qnaService.getDetail(qnaVO);
+		BoardVO boardVO2 = qnaService.getDetail(boardVO);
 		
 		mv.addObject("boardVO",boardVO);
 		mv.setViewName("board/detail");
@@ -71,11 +71,11 @@ public class QnaController {
 	   
 	   //매개변수로 값을 받아올 boardvo 선언
 	   @PostMapping("add" )
-	   public ModelAndView setInsert(QnaVO qnaVO , MultipartFile[] boardFiles)throws Exception{
+	   public ModelAndView setInsert(BoardVO boardVO , MultipartFile[] boardFiles)throws Exception{
 		   for (MultipartFile multipartFile2:boardFiles) {
 			   log.info("OrignalName : {} size{}",multipartFile2.getOriginalFilename(),multipartFile2.getSize());
 		   }
-		  int result = qnaService.setInsert(qnaVO,boardFiles); 
+		  int result = qnaService.setInsert(boardVO,boardFiles); 
 	      ModelAndView mv = new ModelAndView();
 	      mv.setViewName("redirect:./list");
 	

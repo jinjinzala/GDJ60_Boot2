@@ -12,11 +12,9 @@ public class webConfig implements WebMvcConfigurer {
 	@Value("${app.upload.base}")
 	private  String basePath;
 	
-	
 	@Value("${app.url.path}")
 	private String urlPath;
-	
-	
+		
 	@Override
 	public void addResourceHandlers(ResourceHandlerRegistry registry) {
 		// TODO Auto-generated method stub

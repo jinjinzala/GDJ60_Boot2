@@ -3,14 +3,19 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import com.iu.base.board.BoardVO;
+import com.iu.base.board.notice.NoticeVO;
 import com.iu.base.util.Pager;
 
 import lombok.extern.slf4j.Slf4j;
@@ -52,18 +57,26 @@ public class MemberController {
 	}
 	
 	@GetMapping("join")
-	public ModelAndView setJoin() throws Exception{
+	public ModelAndView setJoin(@ModelAttribute MemberVO memberVO) throws Exception{
 		ModelAndView mv = new ModelAndView();
 		mv.setViewName("member/join");
+		
 		return mv;
 	}
 	
 	@PostMapping("join")
-	public ModelAndView setJoin(MemberVO memberVO) throws Exception{
-	
+	public ModelAndView setJoin(@Valid MemberVO memberVO,BindingResult bindingResult) throws Exception{
 		ModelAndView mv = new ModelAndView();
+		
+		boolean check = memberService.passwordCheck(memberVO, bindingResult);
+		
+		 if(check) {
+			  log.warn("======================검증에 실패=========================");
+			  mv.setViewName("member/join");
+			  return mv;
+		   }
 		int result = memberService.setJoin(memberVO);
-		mv.setViewName("redirect:/");
+		mv.setViewName("redirect:../");
 		return mv;
 	}
 
