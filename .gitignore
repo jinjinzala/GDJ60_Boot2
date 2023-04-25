@@ -34,3 +34,4 @@ build/
 
 ## My lgnore ##
 application-dev.properties
+application-prod.properties
