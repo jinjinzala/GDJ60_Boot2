@@ -63,7 +63,7 @@
                                        <form:input path="writer" id="writer" cssClass="form-control"/>
                                         <!-- <input class="form-control" id="writer" type="text" name="writer" data-sb-validations="required,email" /> -->
                              
-                                        <label for="writer">Email address</label>
+                                        <label for="writer">writer</label>
                                          <form:errors path="writer"></form:errors>
                                         <div class="invalid-feedback" data-sb-feedback="email:required">An email is required.</div>
                                         <div class="invalid-feedback" data-sb-feedback="email:email">Email is not valid.</div>
