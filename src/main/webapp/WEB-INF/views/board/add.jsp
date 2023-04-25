@@ -66,8 +66,32 @@
                                         <label for="writer">writer</label>
                                          <form:errors path="writer"></form:errors>
                                         <div class="invalid-feedback" data-sb-feedback="email:required">An email is required.</div>
-                                        <div class="invalid-feedback" data-sb-feedback="email:email">Email is not valid.</div>
+                                       
                                     </div>
+                                    
+                                      <div class="form-floating mb-3">
+                                       <form:input path="subVO.subName" id="writer" cssClass="form-control"/>
+                                        <!-- <input class="form-control" id="writer" type="text" name="writer" data-sb-validations="required,email" /> -->
+                                        <label for="subName">subName</label>
+                                    </div>
+                                    
+                                   <div class="form-floating mb-3">
+                                       <form:input path="names" id="writer" cssClass="form-control"/>
+                                        <!-- <input class="form-control" id="writer" type="text" name="writer" data-sb-validations="required,email" /> -->
+                                        <label for="subName">subName</label>
+                                    </div>
+                                    <div class="form-floating mb-3">
+                                       <form:input path="boardFileVOs[0].fileName" id="writer" cssClass="form-control"/>
+                                        <!-- <input class="form-control" id="writer" type="text" name="writer" data-sb-validations="required,email" /> -->
+                                        <label for="subName">subName</label>
+                                    </div>
+                                    <div class="form-floating mb-3">
+                                       <form:input path="boardFileVOs[1].fileName" id="writer" cssClass="form-control"/>
+                                        <!-- <input class="form-control" id="writer" type="text" name="writer" data-sb-validations="required,email" /> -->
+                                        <label for="subName">subName</label>
+                                    </div>
+                                 
+                                 
                                  
                                     <!-- Message input-->
                                     <div class="form-floating mb-3">
