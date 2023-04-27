@@ -13,35 +13,58 @@
 	VALUES(#{userName},#{num})
 	</insert> 
 	
+	<select id="getMemberlist" resultType="memberVO">
+	SELECT * FROM MEMBER	
+	</select>
+	
+	<select id="setBirth" resultType="memberVO">
+	<![CDATA[
+	SELECT USERNAME FROM MEMBER 
+	WHERE TO_CHAR(NOW(), 'MM/dd') <= TO_CHAR(BIRTH, 'MM/dd')]]>
+	</select>
+ 
+	
+	
+	 <update id="setEnabled" >
+	 <![CDATA[
+      UPDATE MEMBER SET ENABLED = 0
+      WHERE LASTTIME <= DATE_SUB(NOW(), INTERVAL 3 DAY)]]>
+    </update>
+	
+	
+    <update id="setLogOut" parameterType="memberVO" >
+	UPDATE MEMBER SET LASTTIME = now()
+	WHERE USERNAME = #{userName}
+    </update>
+
 
  	<select id="idDuplicateCheck" parameterType="memberVO" resultType="memberVO">
  	SELECT USERNAME FROM MEMBER
  	WHERE USERNAME = #{userName}
  	</select>
+ 	
+ 	
+	<select id="getLogin" parameterType="MemberVO" resultMap="GetLoglnResult" >
+	 SELECT M.userName, M.email, R.num , R.ROLENAME
+	 FROM MEMBER M 
+	 	INNER JOIN 
+	 	MEMBERROLE MR
+	 	ON M.USERNAME = MR.USERNAME
+	 	INNER JOIN
+	 	ROLE R
+	 	ON MR.NUM = R.NUM
+	 	WHERE M.USERNAME = #{userName} AND M.PASSWORD = #{password}
+	
+	</select>
 
-
-
-<select id="getLogin" parameterType="MemberVO" resultMap="GetLoglnResult" >
- SELECT M.userName, M.email, R.num , R.ROLENAME
- FROM MEMBER M 
- 	INNER JOIN 
- 	MEMBERROLE MR
- 	ON M.USERNAME = MR.USERNAME
- 	INNER JOIN
- 	ROLE R
- 	ON MR.NUM = R.NUM
- 	WHERE M.USERNAME = #{userName} AND M.PASSWORD = #{password}
-
-</select>
-
-<resultMap type="MemberVO" id="GetLoglnResult">
-<id property="userName" column="userName"/>
-<result property="email" column="email"/>
-	<collection property="roleVOs" javaType="List" ofType="MemberRoleVO">
-		<id column="num" property="num" />
-		<result column="RoleName"  property="RoleName"/>
-	</collection>
-
-</resultMap>
+	<resultMap type="MemberVO" id="GetLoglnResult">
+	<id property="userName" column="userName"/>
+	<result property="email" column="email"/>
+		<collection property="roleVOs" javaType="List" ofType="MemberRoleVO">
+			<id column="num" property="num" />
+			<result column="RoleName"  property="RoleName"/>
+		</collection>
+	
+	</resultMap>
 
 </mapper>

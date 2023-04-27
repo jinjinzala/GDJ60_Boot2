@@ -46,6 +46,8 @@ public class MemberService {
 	}
 	 	
 	
+	
+	
 	public int setJoin(MemberVO memberVO) throws Exception{
 		memberVO.setEnabled(true);
 		int result = memberDAO.setJoin(memberVO);
@@ -69,10 +71,17 @@ public class MemberService {
 			
 	}
 	
-	public MemberVO idDuplicateCheck(MemberVO memberVO)  throws Exception {
-		return memberDAO.idDuplicateCheck(memberVO);
+	public int  setLogOut(MemberVO memberVO) throws Exception {
+		return 0;
+		
 	}
 	
+	public MemberVO idDuplicateCheck(MemberVO memberVO)  throws Exception {
+		return memberDAO.idDuplicateCheck(memberVO);
+		
+	}
+	
+
 	
 	
 }

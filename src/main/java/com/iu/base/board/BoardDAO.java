@@ -2,6 +2,8 @@ package com.iu.base.board;
 
 import java.util.List;
 
+import org.springframework.web.servlet.ModelAndView;
+
 import com.iu.base.board.qna.QnaVO;
 import com.iu.base.util.Pager;
 
@@ -20,7 +22,7 @@ public interface BoardDAO {
 		public int setBoard(BoardVO boardVO) throws Exception;
 //		
 //		//글작성
-		public int setUpdate(BoardVO boardVO) throws Exception;
+		public ModelAndView setUpdate(BoardVO boardVO) throws Exception;
 		
 		//글작성
 		public int setInsert(BoardVO boardVO) throws Exception;

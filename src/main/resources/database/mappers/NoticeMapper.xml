@@ -17,8 +17,10 @@
 	<select id="getTotalCount" parameterType="Pager" resultType="Long">
 	SELECT COUNT(NUM) FROM NOTICE
 	<include refid="search"></include>
+	</select>
 
-</select>
+
+
 	<insert id="setInsert" parameterType="com.iu.base.board.BoardVO" useGeneratedKeys="true" keyProperty="num">
 	
 	INSERT INTO NOTICE (NUM, TITLE, WRITER, CONTENTS,REGDATE,HIT)
