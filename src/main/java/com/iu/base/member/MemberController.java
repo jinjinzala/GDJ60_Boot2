@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Random;
 import java.util.UUID;
 
+import javax.mail.Session;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
@@ -43,8 +44,18 @@ public class MemberController {
 	@Autowired
 	private PasswordEncoder passwordEncoder;
 	
-	@GetMapping
+
+	@GetMapping("info")
 	public void info(HttpSession session) {
+		
+		String pw = "kkk";
+		
+		MemberVO memberVO =(MemberVO)memberService.loadUserByUsername("kkk");
+		log.error("{}::::::::::::::::: ",memberVO.getPassword() );
+		log.error("{}::::::::::::::::: ",passwordEncoder.encode(pw));
+		log.error("{}::::::::::::::::: ",memberVO.getPassword().equals(passwordEncoder.encode(pw)));
+		boolean check = passwordEncoder.matches(pw, memberVO.getPassword());
+		log.error("{}::::::::::::::::: ",check);
 // SPRING_SECURITY_CONTEXT		
 		log.error("=======================Login info=============");
 //		Enumeration<String> names = session.getAttributeNames();
@@ -112,8 +123,10 @@ public class MemberController {
 
 	
 	@GetMapping("login")
-	public ModelAndView getLogin() throws Exception{
+	public ModelAndView getLogin(HttpSession session) throws Exception{
 		ModelAndView mv = new ModelAndView();
+		Object obj = session.getAttribute("SPRING_SECURITY_CONTEXT");
+		
 		mv.setViewName("./member/login");
 		return mv;
 	}

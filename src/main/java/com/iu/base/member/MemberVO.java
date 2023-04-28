@@ -25,7 +25,9 @@ public class MemberVO implements UserDetails{
 	private String password;
 
 	private String passwordCheck;
-
+    
+	private boolean enabled;
+	
 	@NotBlank
 	private String name;
 	@Email
@@ -87,7 +89,7 @@ public class MemberVO implements UserDetails{
 		// 계정의 사용 여부 
 		//true 사용가능
 		// false 사용불가 
-		return true;
+		return this.enabled;
 	}
 
 
