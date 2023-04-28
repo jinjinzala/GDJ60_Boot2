@@ -1,7 +1,7 @@
   <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-          
+ <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>         
   
       <!-- Navigation-->
             <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
@@ -25,22 +25,22 @@
                             </li>
                             <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle" id="navbarDropdownPortfolio" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Portfolio</a>
-                                <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownPortfolio">
+                                <ul class="dropdown-menu dropdown-menu-end" aria-labelledb                                                                                                                                                   y="navbarDropdownPortfolio">
                                     <li><a class="dropdown-item" href="portfolio-overview.html">Portfolio Overview</a></li>
                                     <li><a class="dropdown-item" href="portfolio-item.html">Portfolio Item</a></li>
                                 </ul>
                             </li>
                             
-                            <c:choose>
-                               <c:when test="${not empty member}">
+                          
+                            <sec:authorize access="isAuthenticated()">
                                    <li class="nav-item"><a class="nav-link" href="/member/logout">Logout</a></li>
                                      <li class="nav-item"><a class="nav-link" href="/member/mypage">Mypage</a></li>                                                      
-                               </c:when>
-                               <c:otherwise>                                     
+                               </sec:authorize>             
+                                <sec:authorize access="!isAuthenticated()">                      
                                 <li class="nav-item"><a class="nav-link" href="/member/login">Login</a></li>
                                     <li class="nav-item"><a class="nav-link" href="/member/join">Join</a></li> 
-                               </c:otherwise>
-                            </c:choose>
+                               </sec:authorize>   
+                       
                             <li class="nav-item"><a class="nav-link" href="/?lang_opt=ko">KO</a></li>
                             <li class="nav-item"><a class="nav-link" href="/?lang_opt=en">EN</a></li> 
                            

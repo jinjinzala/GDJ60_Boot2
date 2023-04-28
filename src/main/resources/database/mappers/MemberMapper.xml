@@ -5,12 +5,12 @@
 
 	<insert id="setJoin" parameterType="memberVO" >
 	INSERT INTO MEMBER (USERNAME, PASSWORD,NAME, EMAIL,BIRTH,ENABLED)
-	VALUES(#{userName},#{password},#{email},#{name},#{birth},1)
+	VALUES(#{username},#{password},#{email},#{name},#{birth},1)
 	</insert> 
 	
 	<insert id="setMemberRole" parameterType="Map" >
-	INSERT INTO MEMBERROLE (USERNAME,NUM)
-	VALUES(#{userName},#{num})
+	INSERT INTO MEMBER_ROLE (USERNAME,NUM)
+	VALUES(#{username},#{num})
 	</insert> 
 	
 	<select id="getMemberlist" resultType="memberVO">
@@ -22,7 +22,12 @@
 	SELECT USERNAME FROM MEMBER 
 	WHERE TO_CHAR(NOW(), 'MM/dd') <= TO_CHAR(BIRTH, 'MM/dd')]]>
 	</select>
- 
+	
+	
+ 	<select id="findPassword" resultType="memberVO">
+	SELECT EMAIL,USERNAME FROM MEMBER	
+	WHERE USERNAME = #{username} AND EMAIL = #{email}
+	</select>
 	
 	
 	 <update id="setEnabled" >
@@ -32,33 +37,38 @@
     </update>
 	
 	
-    <update id="setLogOut" parameterType="memberVO" >
-	UPDATE MEMBER SET LASTTIME = now()
-	WHERE USERNAME = #{userName}
+    <update id="updatePassword" >
+	UPDATE MEMBER SET PASSWORD = #{password}
+	WHERE EMAIL = #{email} AND USERNAME = #{username}
     </update>
 
 
+  <update id="setLogOut" parameterType="memberVO" >
+	UPDATE MEMBER SET LASTTIME = now()
+	WHERE USERNAME = #{username}
+    </update>
+
  	<select id="idDuplicateCheck" parameterType="memberVO" resultType="memberVO">
  	SELECT USERNAME FROM MEMBER
- 	WHERE USERNAME = #{userName}
+ 	WHERE USERNAME = #{username}
  	</select>
  	
  	
 	<select id="getLogin" parameterType="MemberVO" resultMap="GetLoglnResult" >
-	 SELECT M.userName, M.email, R.num , R.ROLENAME
+	 SELECT M.userName,M.password, M.email, R.num , R.ROLENAME
 	 FROM MEMBER M 
 	 	INNER JOIN 
-	 	MEMBERROLE MR
+	 	MEMBER_ROLE MR
 	 	ON M.USERNAME = MR.USERNAME
 	 	INNER JOIN
 	 	ROLE R
 	 	ON MR.NUM = R.NUM
-	 	WHERE M.USERNAME = #{userName} AND M.PASSWORD = #{password}
-	
+	 	WHERE M.USERNAME = #{username}
 	</select>
 
 	<resultMap type="MemberVO" id="GetLoglnResult">
-	<id property="userName" column="userName"/>
+	<id property="username" column="username"/>
+	<result property="password" column="PASSWORD"/>
 	<result property="email" column="email"/>
 		<collection property="roleVOs" javaType="List" ofType="MemberRoleVO">
 			<id column="num" property="num" />

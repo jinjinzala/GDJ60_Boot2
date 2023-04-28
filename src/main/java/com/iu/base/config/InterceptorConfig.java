@@ -15,11 +15,11 @@ public class InterceptorConfig implements WebMvcConfigurer{
 	@Autowired
 	private LocaleChangeInterceptor localeChangeInterceptor;
 	
-	@Autowired
-	private MemberCheckInterceptor memberCheckInterceptor;
-	
-	@Autowired
-	private AdminCheckInterceptor adminCheckInterceptor;
+//	@Autowired
+//	private MemberCheckInterceptor memberCheckInterceptor;
+//	
+//	@Autowired
+//	private AdminCheckInterceptor adminCheckInterceptor;
 	
 	@Override
 	public void addInterceptors(InterceptorRegistry registry) {

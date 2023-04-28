@@ -39,10 +39,10 @@
                 <form:errors path="name"> </form:errors>
               </div>
               <div class="form-floating mb-3">
-                 <form:input path="userName" id="userName" cssClass="form-control"/>
+                 <form:input path="username" id="username" cssClass="form-control"/>
                 <!-- <input type="text" class="form-control" id="userName" name ="userName"  placeholder="userName"> -->
-                <label for="userName">userName</label>
-                <form:errors path="userName"> </form:errors>
+                <label for="username">userName</label>
+                <form:errors path="username"> </form:errors>
               </div>
               <div class="form-floating mb-3">
                <form:input path="email" id="email" cssClass="form-control"/>
@@ -69,7 +69,7 @@
               </div>
               <div class="d-grid">
                 <button class="btn btn-primary btn-login text-uppercase fw-bold" type="submit">Sign in</button>
-              </div>
+              </div>`0
               <hr class="my-4">
               <div class="d-grid mb-2">
                 <button class="btn btn-google btn-login text-uppercase fw-bold" type="submit">

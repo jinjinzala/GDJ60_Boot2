@@ -24,5 +24,9 @@ public interface MemberDAO {
 	
 	public List<MemberVO> setBirth() throws Exception;
 	
+	public MemberVO findPassword(MemberVO memberVO) throws Exception;
+	
+	public int updatePassword(String password ,String email,String username) throws Exception;
+	
 	
 }
